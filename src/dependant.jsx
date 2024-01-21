@@ -17,11 +17,14 @@ const Dependant = () => {
     const { data: post, isLoading } = useQuery({
         queryKey: ['post'],
         queryFn: () => fetchPostById(2),
+        refetchOnWindowFocus:false
     });
-
-    const { data: comments } = useQuery({
+    const postId = post?.id
+    const { data: comments, status } = useQuery({
         queryKey: ['comments', post?.id],
         queryFn: () => fetchCommentsByPostId(post.id),
+        enabled: !!postId,
+        refetchOnWindowFocus:false
     });
 
     return (
@@ -29,7 +32,7 @@ const Dependant = () => {
             <h1 className="text-lg font-bold">Post:</h1>
             {isLoading ? <p>Loading the post</p> : <h2>{post?.title}</h2>}
             <br />
-            <h1 className="text-lg font-bold">Comments</h1>
+            <h1 className="text-lg font-bold">Comments: {status === 'pending' && <span className="text-sm font-bold">pending</span>}</h1>
             <ul>
                 {comments?.map((comment) => (
                     <p key={comment.id}>{comment.body}</p>
