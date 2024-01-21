@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Node js is awesome"
+    },
+    {
+      "id": "2",
+      "title": "JavaScript is cool"
+    },
+    {
+      "id": "3",
+      "title": "Software development"
+    },
+    {
+      "id": "4",
+      "title": "React js developer"
+    },
+    {
+      "id": 5,
+      "title": "React query"
+    }
+  ]
+}
