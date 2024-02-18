@@ -24,7 +24,7 @@ const Optimistic = () => {
       return await queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
-
+  console.log("🚀 ~ Optimistic ~ variables:", variables)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const post = {

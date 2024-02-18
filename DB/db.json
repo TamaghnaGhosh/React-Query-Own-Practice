@@ -15,6 +15,10 @@
     {
       "id": "4",
       "title": "React js developer"
+    },
+    {
+      "id": 5,
+      "title": "React Query"
     }
   ]
 }
