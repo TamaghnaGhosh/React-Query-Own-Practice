@@ -14,10 +14,12 @@ const itemSlice = createSlice({
     getPost: (state, action) => {
       ({ ...state, ...action.payload });
     },
+
     // getPost: (state, action) => {
     //   state.db.push(action.payload);
     // },
     // getPost: (state, action) => ({ ...state, ...action.payload }),
+    
   },
 });
 
