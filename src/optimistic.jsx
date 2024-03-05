@@ -1,13 +1,17 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "./main";
+import { useDispatch } from "react-redux";
+import { getDb, getPost } from "./Redux/itemSlice";
 
 const Optimistic = () => {
+  const dispatch = useDispatch();
   const { data: posts } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
       const response = await fetch("http://localhost:3000/posts?_sort=id").then(
         (data) => data.json()
       );
+      dispatch(getDb(response));
       return response;
     },
   });
@@ -24,14 +28,18 @@ const Optimistic = () => {
       return await queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
-  console.log("🚀 ~ Optimistic ~ variables:", variables)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const post = {
       id: posts?.length + 1,
       title: e.target.elements.title.value,
     };
-    if ((post?.title)?.trim() != "") mutate(post);
+    if (post?.title?.trim() != "") {
+      dispatch(getPost(post));
+      mutate(post);
+      // console.log("🚀 ~ handleSubmit ~ post:", post)
+    }
   };
 
   const handRetry = (post) => {

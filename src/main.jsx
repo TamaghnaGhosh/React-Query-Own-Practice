@@ -9,11 +9,13 @@ import Products from "./paginated.jsx";
 import Parallel from "./parallel.jsx";
 import Optimistic from "./optimistic.jsx";
 import Dependant from "./dependant.jsx";
+import { Provider } from "react-redux";
+import store from "./Redux/store.js";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-    //   refetchOnWindowFocus: false, // default: true
+      //   refetchOnWindowFocus: false, // default: true
       // staleTime:10000,
     },
   },
@@ -43,8 +45,10 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-    <ReactQueryDevtools initialIsOpen={false} />
-  </QueryClientProvider>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </Provider>
 );
